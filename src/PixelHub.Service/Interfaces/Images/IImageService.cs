@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PixelHub.Service.DTOs.User;
 
-namespace PixelHub.Service.Interfaces.Images
+namespace PixelHub.Service.Interfaces.Images;
+
+public interface IImageService
 {
-    internal class IImageAsync
-    {
-    }
+    public Task<bool> DeleteAsync(long Id);
+
+    public Task<UserResultDto> GetAllByUserIdAsync(long UserId);
+
+    public Task<UserResultDto> ModifyAsync(UserUpdateDto dto);
+
+    public Task<UserResultDto> CreateAsync(UserCreateDto dto);
 }
