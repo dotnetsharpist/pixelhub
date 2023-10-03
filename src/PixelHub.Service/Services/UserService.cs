@@ -2,6 +2,7 @@
 using PixelHub.DataAccess.IRepositories;
 using PixelHub.Domain.Entities;
 using PixelHub.Service.DTOs.User;
+using PixelHub.Service.Exceptions;
 using PixelHub.Service.Helpers;
 using PixelHub.Service.Interfaces.Users;
 using PIxelHub.Service.Exceptions;
@@ -30,41 +31,87 @@ public class UserService : IUserService
 
 
         var newUser = _mapper.Map<User>(dto);
-        dto.Password = PasswordHasher.Hash(dto.Password);
-        newUser.PasswordHash = dto.Password;
+        newUser.PasswordHash = PasswordHasher.Hash(dto.Password);
         await _unitOfWork.UserRepository.AddAsync(newUser);
         await _unitOfWork.SaveAsync();
 
         return _mapper.Map<UserResultDto>(newUser);
     }
 
-    public Task<bool> DeleteAsync(long id)
+    public async Task<bool> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        var user = await _unitOfWork.UserRepository.SelectAsync(q => q.Id == id);
+
+        if (user is null)
+            throw new NotFoundException("User not found");
+
+        await _unitOfWork.UserRepository.DeleteAsync(x => x == user);
+
+        return await _unitOfWork.SaveAsync();
     }
 
-    public Task<IEnumerable<UserResultDto>> GetAllAsync()
+    public async Task<IEnumerable<UserResultDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var users = _unitOfWork.UserRepository.SelectAll();
+
+        return _mapper.Map<IEnumerable<UserResultDto>>(users);
     }
 
-    public Task<UserResultDto> GetByEmailAsync(string email)
+    public async Task<UserResultDto> GetByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        var user = await _unitOfWork.UserRepository.SelectAsync(q => q.Email == email);
+
+        if (user is null)
+            throw new NotFoundException("User not found");
+
+        return _mapper.Map<UserResultDto>(user);
     }
 
-    public Task<UserResultDto> GetByIdAsync(long id)
+    public async Task<UserResultDto> GetByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var user = await _unitOfWork.UserRepository.SelectAsync(q => q.Id == id);
+
+        if (user is null)
+            throw new NotFoundException("User not found");
+
+        return _mapper.Map<UserResultDto>(user);
     }
 
-    public Task<UserResultDto> ModifyAsync(UserUpdateDto dto)
+    public async Task<UserResultDto> ModifyAsync(UserUpdateDto dto)
     {
-        throw new NotImplementedException();
+        var exist = await _unitOfWork.UserRepository.SelectAsync(d => d.Id == dto.Id);
+
+        if (exist is null)
+            throw new NotFoundException("User not found");
+
+        if (exist.Email != dto.Email)
+        {
+            var existUser = await _unitOfWork.UserRepository.SelectAsync(d => d.Email == dto.Email);
+            if (existUser is not null)
+                throw new AlreadyExistException("User already exist with this Email");
+        }
+
+        _mapper.Map(dto, exist);
+
+        await _unitOfWork.UserRepository.UpdateAsync(exist);
+        await _unitOfWork.SaveAsync();
+
+        return _mapper.Map<UserResultDto>(exist);
     }
 
-    public Task<UserResultDto> ModifyPasswordAsync(long id, string oldPass, string newPass)
+    public async Task<UserResultDto> ModifyPasswordAsync(long id, string oldPass, string newPass)
     {
-        throw new NotImplementedException();
+        var exist = await _unitOfWork.UserRepository.SelectAsync(q => q.Id == id);
+
+        if (exist is null)
+            throw new NotFoundException("User not found");
+
+        if (oldPass.Verify(exist.PasswordHash))
+            throw new CustomException(403, "Passwor is invalid");
+
+        exist.PasswordHash = newPass.Hash();
+        await _unitOfWork.SaveAsync();
+
+        return _mapper.Map<UserResultDto>(exist);
     }
 }

@@ -1,4 +1,5 @@
-﻿using PixelHub.Service.DTOs.User;
+﻿using PixelHub.Domain.Configurations;
+using PixelHub.Service.DTOs.Image;
 
 namespace PixelHub.Service.Interfaces.Images;
 
@@ -6,9 +7,11 @@ public interface IImageService
 {
     public Task<bool> DeleteAsync(long Id);
 
-    public Task<UserResultDto> GetAllByUserIdAsync(long UserId);
+    public Task<IEnumerable<ImageResultDto>> GetAllByUserIdAsync(long UserId, PaginationParams @params);
 
-    public Task<UserResultDto> ModifyAsync(UserUpdateDto dto);
+    public Task<ImageResultDto> ModifyAsync(ImageUpdateDto dto);
 
-    public Task<UserResultDto> CreateAsync(UserCreateDto dto);
+    public Task<ImageResultDto> CreateAsync(ImageCreateDto dto);
+
+    public Task<ImageResultDto> GetByIdAsync(long imageId);
 }
