@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using PixelHub.DataAccess.IRepositories;
 using PixelHub.Domain.Entities;
 using PixelHub.Service.DTOs.User;
@@ -13,11 +14,13 @@ namespace PixelHub.Service.Services;
 
 public class UserService : IUserService
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public UserService(IUnitOfWork unitOfWork, IMapper mapper)
+    public UserService(IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork, IMapper mapper)
     {
+        _httpContextAccessor = httpContextAccessor;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }

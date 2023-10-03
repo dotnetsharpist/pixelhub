@@ -1,6 +1,6 @@
-﻿namespace PixelHub.WebApi.Controllers
+﻿namespace PixelHub.WebApi.Controllers;
+
+public class AuthController
 {
-    public class AuthController
-    {
-    }
+
 }
