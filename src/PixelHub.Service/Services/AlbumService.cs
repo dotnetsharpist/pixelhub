@@ -1,28 +1,72 @@
-﻿using PixelHub.Service.DTOs.Album;
+﻿using AutoMapper;
+using PixelHub.DataAccess.IRepositories;
+using PixelHub.Domain.Configurations;
+using PixelHub.Domain.Entities;
+using PixelHub.Service.DTOs.Album;
+using PixelHub.Service.DTOs.Image;
 using PixelHub.Service.DTOs.User;
+using PixelHub.Service.Exceptions;
+using PixelHub.Service.Extensions;
 using PixelHub.Service.Interfaces.Albums;
 
 namespace PixelHub.Service.Services;
 
 public class AlbumService : IAlbumService
 {
-    public Task<AlbumResultDto> CreateAsync(AlbumCreateDto dto)
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public AlbumService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        throw new NotImplementedException();
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
-    public Task<bool> DeleteAsync(long id)
+    public async Task<AlbumResultDto> CreateAsync(AlbumCreateDto dto)
     {
-        throw new NotImplementedException();
+        var newAlbum = _mapper.Map<Album>(dto);
+
+        await _unitOfWork.AlbumRepository.AddAsync(newAlbum);
+        await _unitOfWork.SaveAsync();
+
+        return _mapper.Map<AlbumResultDto>(newAlbum);
     }
 
-    public Task<AlbumResultDto> GetByUserIdAsync(long id)
+    public async Task<bool> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        var exist = await _unitOfWork.AlbumRepository.SelectAsync(x => x.Id == id);
+
+        if (exist is null)
+            throw new NotFoundException("Album not found");
+
+        await _unitOfWork.AlbumRepository.DeleteAsync(x => x == exist);
+
+        return await _unitOfWork.SaveAsync();
     }
 
-    public Task<AlbumResultDto> ModifyAsync(AlbumUpdateDto dto)
+    public async Task<IEnumerable<AlbumResultDto>> GetAllByUserIdAsync(long id, PaginationParams @params)
     {
-        throw new NotImplementedException();
+        var exist = await _unitOfWork.AlbumRepository.SelectAsync(x => x.UserId == id);
+
+        if (exist is null)
+            throw new NotFoundException("User not found!");
+
+        var albums = _unitOfWork.ImageRepository.SelectAll(q => q.UserId == id).ToPaginate(@params);
+
+        return _mapper.Map<IEnumerable<AlbumResultDto>>(albums);
+    }
+
+    public async Task<AlbumResultDto> ModifyAsync(AlbumUpdateDto dto)
+    {
+        var existAlbum = await _unitOfWork.AlbumRepository.SelectAsync(x => x.Id == dto.Id);
+
+        if (existAlbum is null)
+            throw new NotFoundException("Album not found");
+
+        _mapper.Map(dto, existAlbum);
+        await _unitOfWork.AlbumRepository.UpdateAsync(existAlbum);
+        await _unitOfWork.SaveAsync();
+
+        return _mapper.Map<AlbumResultDto>(existAlbum);
     }
 }

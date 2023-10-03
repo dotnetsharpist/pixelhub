@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PixelHub.DataAccess\PixelHub.DataAccess.csproj" />
+    <ProjectReference Include="..\PixelHub.Service\PixelHub.Service.csproj" />
   </ItemGroup>
 
 </Project>
