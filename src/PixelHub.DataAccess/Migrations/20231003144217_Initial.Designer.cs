@@ -12,7 +12,7 @@ using PixelHub.DataAccess.Contexts;
 namespace PixelHub.DataAccess.Migrations
 {
     [DbContext(typeof(PixelHubDbContext))]
-    [Migration("20231003110238_Initial")]
+    [Migration("20231003144217_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -120,10 +120,6 @@ namespace PixelHub.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Salt")
                         .IsRequired()
                         .HasColumnType("text");
 

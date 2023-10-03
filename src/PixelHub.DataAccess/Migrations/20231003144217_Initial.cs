@@ -60,7 +60,6 @@ namespace PixelHub.DataAccess.Migrations
                     Email_Confirmed = table.Column<bool>(type: "boolean", nullable: false),
                     UserRole = table.Column<int>(type: "integer", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
-                    Salt = table.Column<string>(type: "text", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)

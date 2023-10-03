@@ -1,6 +1,6 @@
-﻿using TestUp.Domain.Configurations;
+﻿using PixelHub.Domain.Configurations;
 
-namespace TestUp.Service.Extensions;
+namespace PixelHub.Service.Extensions;
 
 public static class CollectionExtension
 {

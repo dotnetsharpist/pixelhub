@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace TestUp.Service.Extensions;
+namespace PixelHub.Service.Extensions;
 
 public static class Converter
 {
