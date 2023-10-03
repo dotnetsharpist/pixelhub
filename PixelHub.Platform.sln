@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelHub.Platform", "PixelHub.Platform\PixelHub.Platform.csproj", "{CE00FC63-A515-45AA-8276-D2D2085F48A6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9DB009C5-79BA-4A54-8776-F42569ECB610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelHub.WebApi", "src\PixelHub.WebApi\PixelHub.WebApi.csproj", "{19E519C5-2D8F-436A-A3BC-65888EF55611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelHub.Service", "src\PixelHub.Service\PixelHub.Service.csproj", "{43484664-5A59-43E1-9AF5-C9134819A005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelHub.Domain", "src\PixelHub.Domain\PixelHub.Domain.csproj", "{050A3C6B-B33A-4608-9D6B-D6DA68F1E0A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelHub.DataAccess", "src\PixelHub.DataAccess\PixelHub.DataAccess.csproj", "{5BAF8192-88E0-429C-85AF-9B11DDD883E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +19,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CE00FC63-A515-45AA-8276-D2D2085F48A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE00FC63-A515-45AA-8276-D2D2085F48A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE00FC63-A515-45AA-8276-D2D2085F48A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE00FC63-A515-45AA-8276-D2D2085F48A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E519C5-2D8F-436A-A3BC-65888EF55611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E519C5-2D8F-436A-A3BC-65888EF55611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E519C5-2D8F-436A-A3BC-65888EF55611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E519C5-2D8F-436A-A3BC-65888EF55611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43484664-5A59-43E1-9AF5-C9134819A005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43484664-5A59-43E1-9AF5-C9134819A005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43484664-5A59-43E1-9AF5-C9134819A005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43484664-5A59-43E1-9AF5-C9134819A005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{050A3C6B-B33A-4608-9D6B-D6DA68F1E0A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050A3C6B-B33A-4608-9D6B-D6DA68F1E0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050A3C6B-B33A-4608-9D6B-D6DA68F1E0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050A3C6B-B33A-4608-9D6B-D6DA68F1E0A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BAF8192-88E0-429C-85AF-9B11DDD883E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BAF8192-88E0-429C-85AF-9B11DDD883E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BAF8192-88E0-429C-85AF-9B11DDD883E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BAF8192-88E0-429C-85AF-9B11DDD883E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19E519C5-2D8F-436A-A3BC-65888EF55611} = {9DB009C5-79BA-4A54-8776-F42569ECB610}
+		{43484664-5A59-43E1-9AF5-C9134819A005} = {9DB009C5-79BA-4A54-8776-F42569ECB610}
+		{050A3C6B-B33A-4608-9D6B-D6DA68F1E0A4} = {9DB009C5-79BA-4A54-8776-F42569ECB610}
+		{5BAF8192-88E0-429C-85AF-9B11DDD883E3} = {9DB009C5-79BA-4A54-8776-F42569ECB610}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF2832E7-2182-4770-9454-C46F59D257F0}
