@@ -12,7 +12,7 @@ using PixelHub.DataAccess.Contexts;
 namespace PixelHub.DataAccess.Migrations
 {
     [DbContext(typeof(PixelHubDbContext))]
-    [Migration("20231003100812_Initial")]
+    [Migration("20231003110238_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -32,6 +32,10 @@ namespace PixelHub.DataAccess.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AlbumName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -63,6 +67,10 @@ namespace PixelHub.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
