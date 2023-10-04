@@ -16,11 +16,9 @@ public class UserService : IUserService
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public UserService(IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork, IMapper mapper)
+    public UserService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _httpContextAccessor = httpContextAccessor;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }

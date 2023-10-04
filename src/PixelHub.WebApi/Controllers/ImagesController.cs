@@ -17,7 +17,7 @@ namespace YourNamespace.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] ImageCreateDto imageCreateDto) =>
+        public async Task<IActionResult> CreateAsync([FromForm] ImageCreateDto imageCreateDto) =>
             Ok(await _imageService.CreateAsync(imageCreateDto));
 
         [HttpGet("{id}")]

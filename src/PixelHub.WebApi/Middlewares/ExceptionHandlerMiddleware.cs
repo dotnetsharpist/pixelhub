@@ -7,6 +7,7 @@ public class ExceptionHandlerMiddleware
 {
     public readonly RequestDelegate request;
     public readonly ILogger<ExceptionHandlerMiddleware> logger;
+
     public ExceptionHandlerMiddleware(RequestDelegate request, ILogger<ExceptionHandlerMiddleware> logger)
     {
         this.request = request;
@@ -35,7 +36,6 @@ public class ExceptionHandlerMiddleware
         {
             context.Response.StatusCode = 500;
             this.logger.LogError(ex.ToString());
-            
         }
     }
 }

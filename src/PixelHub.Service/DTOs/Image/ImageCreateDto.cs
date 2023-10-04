@@ -11,7 +11,5 @@ public class ImageCreateDto
 
     public string ImageName { get; set; } = string.Empty;
 
-    public string ImagePath { get; set; } = string.Empty;
-
     public IFormFile Content { get; set; }
 }

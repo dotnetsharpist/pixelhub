@@ -21,8 +21,8 @@ public class MappingProfile : Profile
         CreateMap<Image, ImageResultDto>().ReverseMap();
 
         // Album
-        CreateMap<AlbumCreateDto, Image>().ReverseMap();
-        CreateMap<AlbumUpdateDto, Image>().ReverseMap();
+        CreateMap<AlbumCreateDto, Album>().ReverseMap();
+        CreateMap<AlbumUpdateDto, Album>().ReverseMap();
         CreateMap<Album, AlbumResultDto>().ReverseMap();
     }
 }
