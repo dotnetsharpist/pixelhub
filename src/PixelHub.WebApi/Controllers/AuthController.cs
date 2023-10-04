@@ -1,6 +1,14 @@
-﻿namespace PixelHub.WebApi.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
+using PixelHub.Service.Interfaces;
 
-public class AuthController
+namespace PixelHub.WebApi.Controllers;
+
+[Route("api/auth")]
+[ApiController]
+
+public class AuthController : ControllerBase
 {
+    private readonly IAuthService authService;
+
 
 }

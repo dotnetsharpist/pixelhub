@@ -51,9 +51,9 @@ public class AlbumService : IAlbumService
         if (exist is null)
             throw new NotFoundException("Album not found!");
 
-        var image = _unitOfWork.ImageRepository.SelectAll(q => q.AlbumId == id).ToPaginate(@params);
+        var images = _unitOfWork.ImageRepository.SelectAll(q => q.AlbumId == id).ToPaginate(@params);
 
-        return _mapper.Map<IEnumerable<ImageResultDto>>(image);
+        return _mapper.Map<IEnumerable<ImageResultDto>>(images);
     }
 
     public async Task<AlbumResultDto> ModifyAsync(AlbumUpdateDto dto)
