@@ -44,16 +44,16 @@ public class AlbumService : IAlbumService
         return await _unitOfWork.SaveAsync();
     }
 
-    public async Task<IEnumerable<AlbumResultDto>> GetAllByUserIdAsync(long id, PaginationParams @params)
+    public async Task<IEnumerable<ImageResultDto>> GetAllByAlbumIdAsync(long id, PaginationParams @params)
     {
-        var exist = await _unitOfWork.AlbumRepository.SelectAsync(x => x.UserId == id);
+        var exist = await _unitOfWork.AlbumRepository.SelectAsync(x => x.Id == id);
 
         if (exist is null)
-            throw new NotFoundException("User not found!");
+            throw new NotFoundException("Album not found!");
 
-        var albums = _unitOfWork.ImageRepository.SelectAll(q => q.UserId == id).ToPaginate(@params);
+        var image = _unitOfWork.ImageRepository.SelectAll(q => q.AlbumId == id).ToPaginate(@params);
 
-        return _mapper.Map<IEnumerable<AlbumResultDto>>(albums);
+        return _mapper.Map<IEnumerable<ImageResultDto>>(image);
     }
 
     public async Task<AlbumResultDto> ModifyAsync(AlbumUpdateDto dto)

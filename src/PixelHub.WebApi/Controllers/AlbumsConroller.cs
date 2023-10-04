@@ -20,9 +20,9 @@ namespace YourNamespace.Controllers
         public async Task<IActionResult> CreateAsync([FromBody] AlbumCreateDto albumCreateDto) =>
             Ok(await _albumService.CreateAsync(albumCreateDto));
 
-        [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetAllByUserIdAsync(long userId, [FromQuery] PaginationParams paginationParams) =>
-            Ok(await _albumService.GetAllByUserIdAsync(userId, paginationParams));
+        [HttpGet("Album/{AlbumId}")]
+        public async Task<IActionResult> GetAllByAlbumIdAsync(long albumId, [FromQuery] PaginationParams paginationParams) =>
+            Ok(await _albumService.GetAllByAlbumIdAsync(albumId, paginationParams));
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(long id, [FromBody] AlbumUpdateDto albumUpdateDto) =>
