@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="logs\" />
+    <Folder Include="wwwroot\media\images\" />
   </ItemGroup>
 
 </Project>
