@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using PixelHub.DataAccess.IRepositories;
-using PixelHub.Domain.Entities;
+using PixelHub.Domain.Entities.User;
 using PixelHub.Service.DTOs.User;
 using PixelHub.Service.Exceptions;
 using PixelHub.Service.Helpers;

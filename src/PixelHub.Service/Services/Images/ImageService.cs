@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using PixelHub.DataAccess.IRepositories;
 using PixelHub.Domain.Configurations;
-using PixelHub.Domain.Entities;
+using PixelHub.Domain.Entities.Image;
 using PixelHub.Service.DTOs.Image;
 using PixelHub.Service.DTOs.User;
 using PixelHub.Service.Exceptions;

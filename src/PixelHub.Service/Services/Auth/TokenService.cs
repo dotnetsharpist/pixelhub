@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using PixelHub.Domain.Entities;
+using PixelHub.Domain.Entities.User;
 using PixelHub.Service.Helpers;
 using PixelHub.Service.Interfaces.Auth;
 using System.IdentityModel.Tokens.Jwt;

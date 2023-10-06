@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using PixelHub.Domain.Entities;
+using PixelHub.Domain.Entities.Album;
+using PixelHub.Domain.Entities.Image;
+using PixelHub.Domain.Entities.User;
 using PixelHub.Service.DTOs.Album;
 using PixelHub.Service.DTOs.Image;
 using PixelHub.Service.DTOs.User;

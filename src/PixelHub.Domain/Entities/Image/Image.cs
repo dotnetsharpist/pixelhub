@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using PixelHub.Domain.Commons;
 
-namespace PixelHub.Domain.Entities;
+namespace PixelHub.Domain.Entities.Image;
 
 public class Image : Auditable
 {

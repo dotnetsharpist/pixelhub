@@ -1,7 +1,10 @@
-﻿namespace PixelHub.Service.Interfaces.Auth;
+﻿using PixelHub.Service.DTOs.Auth;
+
+namespace PixelHub.Service.Interfaces.Auth;
 
 public interface IAuthService
 {
-    string GetUserIdFromToken(string token);
-    Task<string> GenerateTokenAsync(string email, string password);
+    public Task<(bool result, int CachedMinutes)> RegisterAsync(RegisterDto dto);
+
+    public Task<>
 }

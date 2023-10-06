@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PixelHub.Domain.Entities;
+using PixelHub.Domain.Entities.Album;
+using PixelHub.Domain.Entities.Image;
+using PixelHub.Domain.Entities.User;
 
 namespace PixelHub.DataAccess.Contexts;
 

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PixelHub.Domain.Constants;
 
-namespace PixelHub.Service.Helpers
+namespace PixelHub.Service.Helpers;
+
+
+public class TimeHelper
 {
-    internal class TimeHelper
+    public static DateTime GetDateTime()
     {
+            var dtTime = DateTime.Now;
+            dtTime.AddHours(TimeConstants.UTC);
+            return dtTime;
     }
 }

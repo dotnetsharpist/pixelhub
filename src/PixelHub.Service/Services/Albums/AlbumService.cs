@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using PixelHub.DataAccess.IRepositories;
 using PixelHub.Domain.Configurations;
-using PixelHub.Domain.Entities;
+using PixelHub.Domain.Entities.Album;
 using PixelHub.Service.DTOs.Album;
 using PixelHub.Service.DTOs.Image;
 using PixelHub.Service.DTOs.User;

@@ -1,6 +1,8 @@
 ﻿using PixelHub.DataAccess.Contexts;
 using PixelHub.DataAccess.IRepositories;
-using PixelHub.Domain.Entities;
+using PixelHub.Domain.Entities.Album;
+using PixelHub.Domain.Entities.Image;
+using PixelHub.Domain.Entities.User;
 
 namespace PixelHub.DataAccess.Repositories;
 

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PixelHub.DataAccess.IRepositories;
-using PixelHub.Domain.Entities;
+using PixelHub.Domain.Entities.User;
 using PixelHub.Service.Exceptions;
 using PixelHub.Service.Helpers;
 using PixelHub.Service.Interfaces.Auth;
@@ -41,30 +41,30 @@ public class AuthService : IAuthService
         return null;
     }
 
-    public async Task<string> GenerateTokenAsync(string email, string password)
-    {
-        var user = await _repository.SelectAsync(u => u.Email.Equals(email))
-            ?? throw new NotFoundException("This user is not found");
+    //public async Task<string> GenerateTokenAsync(string email, string password)
+    //{
+    //    var user = await _repository.SelectAsync(u => u.Email.Equals(email))
+    //        ?? throw new NotFoundException("This user is not found");
 
-        bool verifiedPassword = password.Verify(user.PasswordHash);
-        if (!verifiedPassword)
-            throw new CustomException(400, "Phone or password is invalid");
+    //    bool verifiedPassword = password.Verify(user.PasswordHash);
+    //    if (!verifiedPassword)
+    //        throw new CustomException(400, "Phone or password is invalid");
 
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var tokenKey = Encoding.UTF8.GetBytes(configuration["JWT:Key"]);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                 new Claim("Email", user.Email),
-                 new Claim("Id", user.Id.ToString()),
-                 new Claim(ClaimTypes.Role, user.UserRole.ToString())
-            }),
-            Expires = DateTime.UtcNow.AddHours(1),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
+    //    var tokenHandler = new JwtSecurityTokenHandler();
+    //    var tokenKey = Encoding.UTF8.GetBytes(configuration["JWT:Key"]);
+    //    var tokenDescriptor = new SecurityTokenDescriptor
+    //    {
+    //        Subject = new ClaimsIdentity(new Claim[]
+    //        {
+    //             new Claim("Email", user.Email),
+    //             new Claim("Id", user.Id.ToString()),
+    //             new Claim(ClaimTypes.Role, user.UserRole.ToString())
+    //        }),
+    //        Expires = DateTime.UtcNow.AddHours(1),
+    //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+    //    };
+    //    var token = tokenHandler.CreateToken(tokenDescriptor);
 
-        return tokenHandler.WriteToken(token);
-    }
+    //    return tokenHandler.WriteToken(token);
+    //}
 }
