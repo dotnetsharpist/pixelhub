@@ -5,12 +5,12 @@ using PixelHub.DataAccess.IRepositories;
 using PixelHub.Domain.Entities;
 using PixelHub.Service.Exceptions;
 using PixelHub.Service.Helpers;
-using PixelHub.Service.Interfaces;
+using PixelHub.Service.Interfaces.Auth;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PixelHub.Service.Services;
+namespace PixelHub.Service.Services.Auth;
 
 public class AuthService : IAuthService
 {
@@ -46,7 +46,7 @@ public class AuthService : IAuthService
         var user = await _repository.SelectAsync(u => u.Email.Equals(email))
             ?? throw new NotFoundException("This user is not found");
 
-        bool verifiedPassword = PasswordHasher.Verify(password, user.PasswordHash);
+        bool verifiedPassword = password.Verify(user.PasswordHash);
         if (!verifiedPassword)
             throw new CustomException(400, "Phone or password is invalid");
 

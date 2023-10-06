@@ -9,7 +9,7 @@ using PixelHub.Service.Interfaces.Users;
 using PIxelHub.Service.Exceptions;
 using System.Xml;
 
-namespace PixelHub.Service.Services;
+namespace PixelHub.Service.Services.Users;
 #pragma warning disable CS1998
 
 public class UserService : IUserService
@@ -32,7 +32,7 @@ public class UserService : IUserService
 
 
         var newUser = _mapper.Map<User>(dto);
-        newUser.PasswordHash = PasswordHasher.Hash(dto.Password);
+        newUser.PasswordHash = dto.Password.Hash();
         await _unitOfWork.UserRepository.AddAsync(newUser);
         await _unitOfWork.SaveAsync();
 

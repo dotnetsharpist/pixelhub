@@ -10,7 +10,7 @@ using PixelHub.Service.Extensions;
 using PixelHub.Service.Interfaces;
 using PixelHub.Service.Interfaces.Images;
 
-namespace PixelHub.Service.Services;
+namespace PixelHub.Service.Services.Images;
 
 public class ImageService : IImageService
 {
@@ -22,7 +22,7 @@ public class ImageService : IImageService
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        this._fileService = fileService;
+        _fileService = fileService;
     }
 
     public async Task<ImageResultDto> CreateAsync(ImageCreateDto dto)

@@ -9,7 +9,7 @@ using PixelHub.Service.Exceptions;
 using PixelHub.Service.Extensions;
 using PixelHub.Service.Interfaces.Albums;
 
-namespace PixelHub.Service.Services;
+namespace PixelHub.Service.Services.Albums;
 
 public class AlbumService : IAlbumService
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PixelHub.Service.Interfaces;
+using PixelHub.Service.Interfaces.Auth;
 
 namespace PixelHub.WebApi.Controllers;
 
@@ -9,6 +9,11 @@ namespace PixelHub.WebApi.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IAuthService authService;
+
+    public AuthController(IAuthService service)
+    {
+        authService = service;
+    }
 
 
 }

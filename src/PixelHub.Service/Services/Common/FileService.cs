@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using PixelHub.Service.Helpers;
 using PixelHub.Service.Interfaces;
 
-namespace PixelHub.Service.Services;
+namespace PixelHub.Service.Services.Common;
 
 public class FileService : IFileService
 {

@@ -6,13 +6,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using PixelHub.Service.Interfaces.Images;
 using PixelHub.Service.Interfaces.Users;
-using PixelHub.Service.Services;
 using Microsoft.OpenApi.Models;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using PixelHub.Service.Mappers;
+using PixelHub.Service.Services.Common;
+using PixelHub.Service.Services.Images;
+using PixelHub.Service.Services.Albums;
+using PixelHub.Service.Services.Users;
 
 namespace PixelHub.WebApi.Extensions;
 

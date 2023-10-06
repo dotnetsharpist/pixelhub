@@ -1,4 +1,4 @@
-﻿namespace PixelHub.Service.Interfaces;
+﻿namespace PixelHub.Service.Interfaces.Auth;
 
 public interface IAuthService
 {
