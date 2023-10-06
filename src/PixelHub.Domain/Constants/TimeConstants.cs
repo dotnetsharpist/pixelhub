@@ -1,7 +1,10 @@
 ﻿namespace PixelHub.Domain.Constants;
 
-public static class Time
+public static class TimeConstants
 {
+
+    public const int UTC = 5;
+
     public static DateTime GetCurrentTime()
     {
         var currentTime = DateTime.UtcNow.AddHours(5);
