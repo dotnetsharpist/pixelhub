@@ -6,8 +6,8 @@ using PixelHub.Service.DTOs.User;
 using PixelHub.Service.Exceptions;
 using PixelHub.Service.Helpers;
 using PixelHub.Service.Interfaces.Users;
-using PIxelHub.Service.Exceptions;
 using System.Xml;
+
 
 namespace PixelHub.Service.Services.Users;
 #pragma warning disable CS1998

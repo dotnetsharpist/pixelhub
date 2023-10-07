@@ -1,4 +1,4 @@
-﻿namespace PIxelHub.Service.Exceptions;
+﻿namespace PixelHub.Service.Exceptions;
 
 public class AlreadyExistException : Exception
 {

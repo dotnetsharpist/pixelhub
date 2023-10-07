@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PixelHub.DataAccess.IRepositories;
 using PixelHub.Domain.Entities.User;
+using PixelHub.Service.DTOs.Auth;
 using PixelHub.Service.Exceptions;
 using PixelHub.Service.Helpers;
 using PixelHub.Service.Interfaces.Auth;
@@ -14,31 +17,60 @@ namespace PixelHub.Service.Services.Auth;
 
 public class AuthService : IAuthService
 {
-    private readonly IConfiguration configuration;
+    private readonly IConfiguration _configuration;
     private readonly IRepository<User> _repository;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+    private readonly ITokenService _tokenService;
+    private readonly IMemoryCache _memoryCache;
 
-    public AuthService(IConfiguration configuration, IRepository<User> repository)
+    private const int CACHED_MINUTES_FOR_REGISTER = 60;
+    private const int CACHED_MINUTES_FOR_VERIFICATION = 5;
+    private const string REGISTER_CACHE_KEY = "register_";
+    private const string VERIFY_REGISTER_CACHE_KEY = "verify_register_";
+    private const int VERIFICATION_MAXIMUM_ATTEMPTS = 3;
+
+    public AuthService(IConfiguration configuration, IRepository<User> repository, IMapper mapper, IUnitOfWork unitOfWork, ITokenService tokenService)
     {
-        this.configuration = configuration;
+        _configuration = configuration;
         _repository = repository;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+        _tokenService = tokenService;
     }
 
-    public string GetUserIdFromToken(string token)
+    public async Task<(bool Result, string Token)> LoginAsync(LoginDto loginDto)
     {
-        var tokenHandler = new JwtSecurityTokenHandler();
+        var user = await _unitOfWork.UserRepository.SelectAsync(x => x.Email == loginDto.Email);
+        if (user is null)
+            throw new NotFoundException("User not found!");
 
-        if (tokenHandler.CanReadToken(token))
-        {
-            var jwtToken = tokenHandler.ReadJwtToken(token);
-            var idClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "Id");
+        var hasherResult = PasswordHasher.Verify(loginDto.Password, user.PasswordHash);
+        if (!hasherResult)
+            throw new CustomException(401,"Password is incorrect!");
 
-            if (idClaim != null)
-            {
-                return idClaim.Value;
-            }
-        }
+        string token = await _tokenService.GenerateToken(user);
 
-        return null;
+        return (Result: true, Token: token);
+    }
+
+    public async Task<(bool result, int CachedMinutes)> RegisterAsync(RegisterDto dto)
+    {
+        var exist = await _unitOfWork.UserRepository.SelectAsync(x => x.Email == dto.Email);
+        if (exist is not null)
+            throw new AlreadyExistException("User already exist!");
+
+
+    }
+
+    public Task<(bool Result, int CachedVerificationMinutes)> SendCodeForRegisterAsync(string phone)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<(bool Result, string Token)> VerifyRegisterAsync(string phone, int code)
+    {
+        throw new NotImplementedException();
     }
 
     //public async Task<string> GenerateTokenAsync(string email, string password)
