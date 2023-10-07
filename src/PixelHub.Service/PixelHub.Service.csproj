@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Security\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
 

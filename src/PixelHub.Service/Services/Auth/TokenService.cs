@@ -24,8 +24,8 @@ public class TokenService : ITokenService
         var identityClaims = new Claim[]
         {
             new Claim("Id", user.Id.ToString()),
-            new Claim("FirstName", user.Firstname),
-            new Claim("Lastname", user.Lastname),
+            new Claim("FirstName", user.FirstName),
+            new Claim("Lastname", user.LastName),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.UserRole.ToString())
         };
@@ -42,5 +42,23 @@ public class TokenService : ITokenService
             signingCredentials: keyCredentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public string GetUserIdFromToken(string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        if (tokenHandler.CanReadToken(token))
+        {
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var idClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "Id");
+
+            if (idClaim != null)
+            {
+                return idClaim.Value;
+            }
+        }
+
+        return null;
     }
 }
