@@ -58,9 +58,9 @@ public class AuthService : IAuthService
     {
         var exist = await _unitOfWork.UserRepository.SelectAsync(x => x.Email == dto.Email);
         if (exist is not null)
-            throw new AlreadyExistException("User already exist!");
+            throw new Already\\\\\ExistException("User already exist!");
 
-
+        if ()asa
     }
 
     public Task<(bool Result, int CachedVerificationMinutes)> SendCodeForRegisterAsync(string phone)
