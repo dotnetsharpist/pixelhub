@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace PixelHub.Service.Exceptions;
 
-namespace PixelHub.Service.Exceptions
+public class UserCacheDateExpiredExeption : ExpiredExeption
 {
-    internal class UserCacheDateExpiredExeption
+    public UserCacheDateExpiredExeption()
     {
+        this.TitleMessage = "User data has expired!";
     }
 }
