@@ -1,5 +1,4 @@
 ﻿using PixelHub.Service.Exceptions;
-using PIxelHub.Service.Exceptions;
 
 namespace PixelHub.WebApi.Middlewares;
 
