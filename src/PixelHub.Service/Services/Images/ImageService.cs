@@ -33,7 +33,7 @@ public class ImageService : IImageService
         var album = await _unitOfWork.AlbumRepository.SelectAsync(q => q.Id == dto.AlbumId);
 
         if (album is null)
-            throw new NotFoundException("Album not found");
+            throw new NotFoundException("Album not found!");
 
         newImage.ImagePath = result;
 
