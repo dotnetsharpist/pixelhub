@@ -37,7 +37,7 @@ public class AlbumService : IAlbumService
         var exist = await _unitOfWork.AlbumRepository.SelectAsync(x => x.Id == id);
 
         if (exist is null)
-            throw new NotFoundException("Album not found");
+            throw new NotFoundException("Album not found!");
 
         await _unitOfWork.AlbumRepository.DeleteAsync(x => x == exist);
 
