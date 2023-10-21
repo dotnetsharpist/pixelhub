@@ -48,7 +48,7 @@ public class ImageService : IImageService
         var image = await _unitOfWork.ImageRepository.SelectAsync(q => q.Id == Id);
 
         if (image is null)
-            throw new NotFoundException("Image not found");
+            throw new NotFoundException("Image not found!");
 
         var result = await _fileService.DeleteImageAsync(image.ImagePath);
 
